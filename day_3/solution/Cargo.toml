@@ -1,0 +1,9 @@
+[package]
+name = "solution"
+version = "0.1.0"
+authors = ["Max Tyler <maxastyler@gmail.com>"]
+edition = "2018"
+
+[dependencies]
+regex = "1"
+bitvec = "0.8"
