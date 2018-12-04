@@ -1,7 +1,5 @@
-extern crate chrono;
 extern crate regex;
 
-use chrono::prelude::*;
 use std::collections::HashMap;
 
 use regex::{Regex, RegexSet};
@@ -13,7 +11,7 @@ fn main() {
     let mut input = include_str!("/home/max/git/advent_of_code_2018/day_4/input.txt")
         .lines()
         .collect::<Vec<_>>();
-    &input[..].sort_by_key(|x| NaiveDateTime::parse_from_str(&x[1..17], "%F %R").unwrap());
+    &input[..].sort();
     let regex_set = RegexSet::new(&[
         r"\[\d{4}-\d{2}-\d{2} \d{2}:\d{2}\] Guard #\d+ begins shift",
         r"\[\d{4}-\d{2}-\d{2} \d{2}:\d{2}\] falls asleep",
