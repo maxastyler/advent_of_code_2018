@@ -7,6 +7,9 @@ use std::collections::HashMap;
 use regex::{Regex, RegexSet};
 
 fn main() {
+
+    // PARSING STUFF
+
     let mut input = include_str!("/home/max/git/advent_of_code_2018/day_4/input.txt")
         .lines()
         .collect::<Vec<_>>();
@@ -42,12 +45,14 @@ fn main() {
                     .for_each(|i| current_times[i as usize] += 1)
             }
         });
+
+    // FINDING THE SLEEPY ELVES LOGIC
+
     let (elf_id, elf_sleepy_minutes) = elves
         .iter()
-        .enumerate()
-        .max_by_key(|(_, (_, x))| x.iter().fold(0, |a, &i| a + (i as u16)))
-        .unwrap()
-        .1;
+        .max_by_key(|(_, x)| x.iter().fold(0, |a, &i| a + (i as u16)))
+        .unwrap();
+
     let sleepiest_minute = elf_sleepy_minutes
         .iter()
         .enumerate()
@@ -59,5 +64,17 @@ fn main() {
         elf_id,
         sleepiest_minute,
         (*elf_id as usize)*sleepiest_minute,
+    );
+
+    let (guard, (minute, _)) = elves
+        .iter()
+        .map(|(a, b)| (a, b.iter().enumerate().max_by_key(|(_, &i)| i).unwrap()))
+        .max_by_key(|(_, (_, &i))| i)
+        .unwrap();
+    println!(
+        "Sleepiest minute elf is {}, and the sleepiest minute is {}, the checksum is {}",
+        guard,
+        minute,
+        (*guard as usize) * minute
     );
 }
