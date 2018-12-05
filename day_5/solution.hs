@@ -2,7 +2,9 @@ import Data.Char
 
 main = do
   file_str <- readFile "input.txt"
-  print $ length $ filter (/= '\n') $ react_iteratively file_str
+  let filtered = filter (/='\n') file_str
+  print $ length $ react_iteratively filtered
+  print $ minimum [length $ react_iteratively $ filter (\x -> toLower x /= l) filtered | l <- ['a'..'z']]
 
 react_elements (a:rest@(b:c)) | same_letter && opposite_case = react_elements c
                               | otherwise = a:(react_elements rest)
