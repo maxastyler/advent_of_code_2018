@@ -6,11 +6,9 @@ main = do
   print $ length $ react_iteratively filtered
   print $ minimum [length $ react_iteratively $ filter (\x -> toLower x /= l) filtered | l <- ['a'..'z']]
 
-react_elements (a:rest@(b:c)) | same_letter && opposite_case = react_elements c
+react_elements (a:rest@(b:c)) | same_letter && a /= b = react_elements c
                               | otherwise = a:(react_elements rest)
-          where pol = flip elem ['a'..'z']
-                same_letter = toUpper a == toUpper b
-                opposite_case = pol a /= pol b
+                where same_letter = toUpper a == toUpper b
 react_elements a = a
 
 react_iteratively s | s == s' = s
