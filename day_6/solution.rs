@@ -1,5 +1,5 @@
 fn main() {
-    let mut coords = include_str!("./input.txt")
+    let coords = include_str!("./input.txt")
         .lines()
         .map(|x| {
             let mut split = x.split(", ");
