@@ -35,7 +35,7 @@ fn display(p: &Vec<Vec<i64>>) {
     let max_y = p.iter().max_by_key(|v| v[1]).unwrap()[1];
     let n_lines = (max_y - min_y) as usize;
     let width = (max_x - min_x) as usize;
-    let mut str: Vec<Vec<u8>> = vec![vec![0x2e; width+1]; n_lines+1];
+    let mut str: Vec<Vec<u8>> = vec![vec![0x2e; width + 1]; n_lines + 1];
     for point in p {
         str[(point[1] - min_y) as usize][(point[0] - min_x) as usize] = 0x23;
     }
@@ -81,5 +81,5 @@ fn main() {
         old_p = new_p.clone();
     }
     display(&old_p.0);
-    println!("Took: {} seconds", time-1);
+    println!("Took: {} seconds", time - 1);
 }
