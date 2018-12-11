@@ -1,4 +1,5 @@
 use std::ops::Range;
+use std::collections::VecDeque;
 
 struct MarbleGame {
     player_count: usize,
@@ -64,4 +65,23 @@ fn main() {
             None => (),
         }
     }
+    let mut player_scores = vec![0; players];
+    let mut game: VecDeque<usize> = VecDeque::with_capacity(high_marble*100);
+    game.push_back(0);
+    for i in 1..(high_marble*100+1) {
+        if i % 23 == 0 {
+            for _ in 0..7 {
+                let tmp = game.pop_back().unwrap();
+                game.push_front(tmp);
+            }
+            player_scores[i % players] += game.pop_front().unwrap() + i;
+        } else {
+            for _ in 0..2 {
+                let tmp = game.pop_front().unwrap();
+                game.push_back(tmp);
+            }
+            game.push_front(i);
+        }
+    }
+    println!("Winning score for game 2 was: {}", player_scores.iter().max().unwrap());
 }
